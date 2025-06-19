@@ -2,12 +2,12 @@
   <form class="comment-form" @submit.prevent="handleSubmit">
     <textarea
       v-model="text"
-      placeholder="Ваш комментарий..."
+      placeholder="Ваш коментар..."
       required
     ></textarea>
 
     <img :src="captcha.image_url" alt="captcha" />
-    <input v-model="captchaText" placeholder="Введите CAPTCHA" />
+    <input v-model="captchaText" placeholder="Введіть CAPTCHA" />
 
     <div class="file-group">
       <label>
@@ -20,7 +20,7 @@
       </label>
     </div>
 
-    <button type="submit">Отправить</button>
+    <button type="submit">Відправити</button>
   </form>
 </template>
 
@@ -73,7 +73,7 @@ function handleTextFile(e) {
   if (file && file.size <= 102400) {
     textFile.value = file
   } else {
-    alert('Файл должен быть формата .txt и не больше 100 кб')
+    alert('Файл повинен бути формата .txt та не більше 100 кб')
     e.target.value = ''
   }
 }
@@ -108,7 +108,7 @@ async function handleSubmit() {
     emit('submitted')
   } else {
     const err = await res.json()
-    alert('Ошибка отправки: ' + JSON.stringify(err))
+    alert('Помилка відправки: ' + JSON.stringify(err))
   }
 }
 

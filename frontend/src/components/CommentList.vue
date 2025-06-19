@@ -23,7 +23,7 @@
         </div>
 
         <button class="reply-btn" @click="toggleReply(comment.id)">
-          Ответить
+          Відповісти
         </button>
       </div>
 

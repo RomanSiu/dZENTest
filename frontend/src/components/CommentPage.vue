@@ -1,13 +1,13 @@
 <template>
   <div class="comment-page">
     <button class="add-comment-btn" @click="showForm = !showForm">
-      {{ showForm ? 'Закрыть форму' : '+ Добавить комментарий' }}
+      {{ showForm ? 'Закрити' : 'Додати коментар' }}
     </button>
 
     <div class="sort-bar">
-      <label for="sort">Сортировать по:</label>
+      <label for="sort">Сортувати за:</label>
       <select v-model="sort" @change="fetchComments">
-        <option value="username">Имя</option>
+        <option value="username">імя</option>
         <option value="email">Email</option>
         <option value="created_at">Дата</option>
       </select>
@@ -25,12 +25,12 @@
       @submitted="handleSubmitted"
     />
 
-    <p v-else class="no-comments">Комментариев пока нет</p>
+    <p v-else class="no-comments">Коментарів поки немає</p>
 
     <div class="pagination">
       <button @click="prevPage" :disabled="!prev" class="page-btn">← Назад</button>
-      <span>Страница {{ page }}</span>
-      <button @click="nextPage" :disabled="!next" class="page-btn">Вперёд →</button>
+      <span>Сторінка {{ page }}</span>
+      <button @click="nextPage" :disabled="!next" class="page-btn">Вперед →</button>
     </div>
   </div>
 </template>
@@ -56,10 +56,10 @@ async function loadComments() {
       const data = await res.json()
       comments.value = data.results
     } else {
-      console.error('Ошибка загрузки комментариев')
+      console.error('Помилка завантаження коментарів')
     }
   } catch (err) {
-    console.error('Ошибка:', err)
+    console.error('Помилка:', err)
   }
 }
 

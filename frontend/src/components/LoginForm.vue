@@ -1,12 +1,12 @@
 <template>
   <div class="auth-wrapper">
     <form @submit.prevent="login" class="auth-form">
-      <h2 class="login-title">Вход</h2>
-      <input v-model="username" placeholder="Имя пользователя" required />
+      <h2 class="login-title">Вхід</h2>
+      <input v-model="username" placeholder="Імя користувача" required />
       <input v-model="password" placeholder="Пароль" type="password" required />
-      <button type="submit">Войти</button>
+      <button type="submit">Ввійти</button>
       <p class="message" v-if="message">{{ message }}</p>
-      <router-link to="/register">Нет аккаунта? Зарегистрируйтесь</router-link>
+      <router-link to="/register">Нема аккаунту? Зареєструватися</router-link>
     </form>
   </div>
 </template>
@@ -31,11 +31,11 @@ async function login() {
     const data = await res.json()
     localStorage.setItem('jwt_access', data.access)
     localStorage.setItem('jwt_refresh', data.refresh)
-    message.value = 'Вы успешно вошли!'
+    message.value = 'Ви успішно ввійшли!'
     setTimeout(() => router.push('/'), 1000)
   } else {
     const data = await res.json()
-    message.value = 'Ошибка входа: ' + (data.detail || 'Неверные данные')
+    message.value = 'Помилка входу: ' + (data.detail || 'Неправильні данні')
   }
 }
 </script>

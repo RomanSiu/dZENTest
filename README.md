@@ -1,29 +1,86 @@
-# frontend
+# Коментарна система на Django + Vue 3
 
-This template should help get you started developing with Vue 3 in Vite.
+Це повнофункціональний вебзастосунок для створення, відповіді та перегляду коментарів. Застосунок підтримує вкладені відповіді, прикріплення файлів, CAPTCHA, авторизацію за JWT, сортування, пагінацію та асинхронну обробку зображень через Celery і Redis.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🔧 Використані технології
 
-## Customize configuration
+### Backend:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+* Django 4+
+* Django REST Framework
+* JWT авторизація (`djangorestframework-simplejwt`)
+* Celery + Redis
+* PostgreSQL
+* django-simple-captcha
 
-## Project Setup
+### Frontend:
 
-```sh
-npm install
+* Vue 3 (Composition API)
+* Vite
+* CSS
+* Axios
+
+---
+
+## ⚙️ Основний функціонал
+
+* Реєстрація та авторизація користувачів (JWT)
+* Додавання основних та вкладених коментарів
+* Валідація форми, CAPTCHA
+* Можливість прикріпити:
+
+  * зображення (JPG, PNG, GIF, < 320x240)
+  * текстові файли (.txt, < 100 Кб)
+* Ієрархічне відображення коментарів з пагінацією (по 25)
+* Сортування за ім’ям, email, датою
+* Обробка файлів через чергу (Celery)
+
+---
+
+## 📁 Структура репозиторію
+
+```
+project/
+├── backend/             # Django API
+│   ├── accounts/        # додаток аккаунтів
+│   ├── comments/        # додаток коментарів
+│   └── dZEN/          # налаштування Django
+├── frontend/            # Vue 3 застосунок
+├── docker-compose.yml  # запуск усіх сервісів
+├── .env                # змінні середовища
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
+## 🚀 Швидкий старт через Docker
+
+### 1. Клонувати репозиторій
+
+```bash
+git clone https://github.com/your-repo/comment-app.git
+cd comment-app
 ```
 
-### Compile and Minify for Production
+### 2. Створити `.env` файл
 
-```sh
-npm run build
+```ini
+# .env
+SECRET_KEY=your_secret_key
+ALLOWED_HOSTS=localhost,backend
+POSTGRES_DB=comment_db
+POSTGRES_USER=comment_user
+POSTGRES_PASSWORD=comment_pass
 ```
+
+### 3. Запуск
+
+```bash
+docker compose up --build
+```
+
+## 🌐 Доступ до сервісів
+
+* Django API: [http://localhost:8000/api/](http://localhost:8000/api/)
+* Фронтенд (Vite): [http://localhost:5173](http://localhost:5173)

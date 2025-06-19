@@ -1,13 +1,13 @@
 <template>
   <div class="auth-wrapper">
     <form @submit.prevent="register" class="auth-form">
-      <h2 class="register-title">Регистрация</h2>
-      <input v-model="username" placeholder="Имя пользователя" required />
+      <h2 class="register-title">Реєстрація</h2>
+      <input v-model="username" placeholder="Імя користувача" required />
       <input v-model="email" placeholder="Email" type="email" required />
       <input v-model="password" placeholder="Пароль" type="password" required />
-      <button type="submit">Зарегистрироваться</button>
+      <button type="submit">Зареєструватися</button>
       <p class="message" v-if="message">{{ message }}</p>
-      <router-link to="/login">Уже есть аккаунт? Войти</router-link>
+      <router-link to="/login">Вже є аккаунт? Ввійти</router-link>
     </form>
   </div>
 </template>
@@ -37,20 +37,20 @@ async function register() {
     });
 
     if (res.ok) {
-      message.value = 'Вы успешно зарегистрировались! Сейчас вы будете перенаправлены на вход...';
+      message.value = 'Ви успішно зареєструвались! Зараз ви будете перенаправлені на вхід...';
       setTimeout(() => router.push('/login'), 2000);
     } else {
       const text = await res.text(); // читаем текст, а не json
       try {
         const data = JSON.parse(text);
-        message.value = 'Ошибка: ' + (data.detail || JSON.stringify(data));
+        message.value = 'Помилка: ' + (data.detail || JSON.stringify(data));
       } catch {
-        message.value = 'Ошибка: ' + text;
+        message.value = 'Помилка: ' + text;
       }
     }
   } catch (err) {
-    console.error('Ошибка сети или JS:', err);
-    message.value = 'Ошибка сети. Проверьте соединение или консоль.';
+    console.error('Помилка мережі чи JS:', err);
+    message.value = "Помилка мережі. Перевірте з'єднання.";
   }
 }
 

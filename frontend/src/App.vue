@@ -2,9 +2,9 @@
   <div>
     <nav class="navbar">
       <div class="nav-container">
-        <router-link to="/" class="nav-item">Главная</router-link>
-        <router-link to="/login" class="nav-item">Вход</router-link>
-        <router-link to="/register" class="nav-item">Регистрация</router-link>
+        <router-link to="/" class="nav-item">Головна</router-link>
+        <router-link to="/login" class="nav-item">Вхід</router-link>
+        <router-link to="/register" class="nav-item">Реєстрація</router-link>
       </div>
     </nav>
     <main class="main-content">
@@ -14,7 +14,6 @@
 </template>
 
 <script setup>
-// App.vue — layout с навигацией
 </script>
 
 <style scoped>
