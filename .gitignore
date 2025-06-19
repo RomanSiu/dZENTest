@@ -29,9 +29,10 @@ coverage
 
 *.tsbuildinfo
 
+# Django static and media
+*/staticfiles/
+*/media/
 
-*.staticfiles
+# Environment
 .env
-.venv
-*.media
-
+.venv/
