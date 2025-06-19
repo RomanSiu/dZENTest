@@ -1,10 +1,23 @@
 import bleach
 from rest_framework import serializers
 
-from .models import Comment
+from .models import Comment, CommentAttachment
+
+
+class CommentAttachmentSerializer(serializers.ModelSerializer):
+    file = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CommentAttachment
+        fields = ['id', 'file', 'name']
+
+    def get_file(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.file.url)
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    attachments = CommentAttachmentSerializer(many=True, read_only=True)
     replies = serializers.SerializerMethodField(read_only=True)
 
     ALLOWED_TAGS = ['b', 'i', 'u', 'br']
@@ -12,8 +25,8 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
-            'id', 'homepage', 'text', 'created_at', 'updated_at',
-            'parent', 'replies', 'username', 'email'
+            'id', 'username', 'email', 'homepage', 'text', 'created_at', 'updated_at',
+            'parent', 'replies', 'attachments'
         ]
         read_only_fields = ['created_at', 'replies', 'username', 'email']
 

@@ -19,3 +19,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.username} ({self.email})'
+
+
+class CommentAttachment(models.Model):
+    comment = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name='attachments')
+    file = models.FileField(upload_to='attachments/')
+    name = models.CharField(max_length=255)

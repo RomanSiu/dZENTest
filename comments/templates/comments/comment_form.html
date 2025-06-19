@@ -1,0 +1,23 @@
+<div id="app">
+  <div class="preview" v-if="preview">
+    <h3>Preview:</h3>
+    <div v-html="formattedText"></div>
+    <img v-if="imagePreview" :src="imagePreview" style="max-width: 320px; max-height: 240px;" />
+    <p v-if="textFileName">Attached: {{ textFileName }}</p>
+  </div>
+
+  <div>
+    <div>
+      <button @click="wrapTag('i')">[i]</button>
+      <button @click="wrapTag('strong')">[strong]</button>
+      <button @click="wrapTag('code')">[code]</button>
+      <button @click="wrapTag('a', ' href=\"\" title=\"\"')">[a]</button>
+    </div>
+
+    <textarea v-model="text" rows="5" placeholder="Your comment"></textarea>
+
+    <input type="file" @change="handleFile" />
+    <button @click="togglePreview">🔍 Preview</button>
+    <button @click="submit">📨 Submit</button>
+  </div>
+</div>
