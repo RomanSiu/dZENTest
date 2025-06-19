@@ -30,6 +30,8 @@ coverage
 *.tsbuildinfo
 
 
+*.staticfiles
+.env
 .venv
-.media
+*.media
 

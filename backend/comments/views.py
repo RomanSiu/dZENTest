@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +17,13 @@ class CommentListAPIView(APIView):
     def get(self, request):
         sort_param = request.GET.get('sort', 'created_at')
         order = request.GET.get('order', 'desc')
+        page_number = request.GET.get('page', 1)
+
+        cache_key = f'comments:{sort_param}:{order}:page:{page_number}'
+        cached_data = cache.get(cache_key)
+
+        if cached_data:
+            return Response(cached_data)
 
         sort_fields = {
             'username': 'username',
@@ -31,7 +39,11 @@ class CommentListAPIView(APIView):
         paginator.page_size = 25
         result_page = paginator.paginate_queryset(queryset, request)
         serializer = CommentSerializer(result_page, many=True, context={'request': request})
-        return paginator.get_paginated_response(serializer.data)
+        response = paginator.get_paginated_response(serializer.data)
+
+        cache.set(cache_key, response.data, timeout=300)
+
+        return response
 
 
 class CommentCreateAPIView(APIView):
@@ -61,6 +73,8 @@ class CommentCreateAPIView(APIView):
                     file=file,
                     name=file.name
                 )
+
+            cache.clear()
 
             return Response(CommentSerializer(comment, context={'request': request}).data,
                             status=status.HTTP_201_CREATED)

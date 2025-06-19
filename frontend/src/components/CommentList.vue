@@ -15,7 +15,7 @@
 
         <div v-if="comment.attachments">
           <div v-for="file in comment.attachments" :key="file.id">
-            <a :href="file.file" target="_blank">📎 {{ file.name }}</a>
+            <a :href="`http://localhost:8000${file.file}`" target="_blank">📎 {{ file.name }}</a>
             <img v-if="file.file.endsWith('.jpg') || file.file.endsWith('.png')"
                  :src="file.file"
                  style="max-width: 200px; display: block; margin-top: 5px" />

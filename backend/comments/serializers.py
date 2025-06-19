@@ -1,3 +1,5 @@
+from urllib.parse import urljoin
+
 import bleach
 from rest_framework import serializers
 
@@ -12,8 +14,7 @@ class CommentAttachmentSerializer(serializers.ModelSerializer):
         fields = ['id', 'file', 'name']
 
     def get_file(self, obj):
-        request = self.context.get('request')
-        return request.build_absolute_uri(obj.file.url)
+        return urljoin("http://localhost:8000", obj.file.url)
 
 
 class CommentSerializer(serializers.ModelSerializer):
