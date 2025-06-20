@@ -66,12 +66,13 @@ cd comment-app
 ### 2. Створити `.env` файл
 
 ```ini
-# .env
-SECRET_KEY=your_secret_key
-ALLOWED_HOSTS=localhost,backend
-POSTGRES_DB=comment_db
-POSTGRES_USER=comment_user
-POSTGRES_PASSWORD=comment_pass
+#.env
+POSTGRES_DB=commentsdb
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
+SECRET_KEY=your_secret_here
+DJANGO_ALLOWED_HOSTS=*
 ```
 
 ### 3. Запуск
